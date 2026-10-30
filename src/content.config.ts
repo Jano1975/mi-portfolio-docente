@@ -15,6 +15,7 @@ const proyectosCollection = defineCollection({
     nivelEducativo: z.string(),
     metodologias: z.array(z.string()),
     tagsTecnicos: z.array(z.string()),
+    downloadUrl: z.string().optional(), 
   }),
 });
 

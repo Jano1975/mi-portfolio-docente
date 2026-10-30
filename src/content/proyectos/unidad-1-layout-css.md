@@ -5,6 +5,7 @@ pubDate: 2026-10-30
 nivelEducativo: "FP Grado Superior (DAW)"
 metodologias: ["ABP", "Evaluación Formativa"]
 tagsTecnicos: ["CSS Grid", "Flexbox", "Accesibilidad"]
+downloadUrl: "/docs/unidad-1-layouts.pdf"
 ---
 
 ## 1. Justificación Pedagógica

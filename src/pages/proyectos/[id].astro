@@ -56,17 +56,33 @@ const fechaFormateada = proyecto.data.pubDate.toLocaleDateString('es-ES', {
         "{proyecto.data.description}"
       </p>
 
-      <!-- Metodologías utilizadas -->
-      <div class="flex flex-wrap gap-2 mt-6">
-        {proyecto.data.metodologias.map((metodologia) => (
-          <span class="text-xs bg-emerald-50 text-emerald-700 px-3 py-1 rounded-md font-medium border border-emerald-100">
-            {metodologia}
-          </span>
-        ))}
+            <!-- Metodologías utilizadas -->
+      <div class="flex flex-wrap items-center justify-between gap-4 mt-6">
+        <div class="flex flex-wrap gap-2">
+          {proyecto.data.metodologias.map((metodologia) => (
+            <span class="text-xs bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 px-3 py-1 rounded-md font-medium border border-emerald-100 dark:border-emerald-900/60">
+              {metodologia}
+            </span>
+          ))}
+        </div>
+
+        <!-- —— BOTÓN DE DESCARGA DINÁMICO —— -->
+        {proyecto.data.downloadUrl && (
+          <a
+            href={`/mi-portfolio-docente${proyecto.data.downloadUrl}`}
+            download
+            class="inline-flex items-center gap-2 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 px-4 py-2 rounded-xl shadow-sm transition-colors cursor-pointer"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"></path>
+            </svg>
+            Descargar Programación (PDF)
+          </a>
+        )}
       </div>
     </header>
 
-    <!-- Cuerpo del Markdown (Contenido Pedagógico) -->
+    <!-- Cuerpo del Markdown -->
     <!-- Usamos clases semánticas de espaciado y tipografía nativas -->
     <!-- Cuerpo del Markdown (Contenido Pedagógico) -->
     <div class="prose prose-slate max-w-none 
