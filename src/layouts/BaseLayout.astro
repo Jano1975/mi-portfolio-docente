@@ -1,0 +1,48 @@
+---
+// src/layouts/BaseLayout.astro
+import Navbar from '../components/Navbar.astro'; // <-- 1. Importamos la Navbar
+import Footer from '../components/Footer.astro';
+import '../styles/global.css'; 
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<html lang="es" class="scroll-smooth"> <!-- Añadimos scroll-smooth para que los enlaces internos (#) se muevan con suavidad -->
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<!-- Script crítico inline para evitar el "flash" visual -->
+		<script is:inline>
+			const obtenerTemaPreferido = () => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+				return localStorage.getItem('theme');
+				}
+				return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+			};
+			
+			const tema = obtenerTemaPreferido();
+			
+			if (tema === 'dark') {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+		</script>
+	</head>
+	<!-- Quitamos flex-col justify-center e items-center para que las páginas fluyan de forma natural hacia abajo -->
+	<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased font-sans min-h-screen flex flex-col transition-colors duration-300">
+		
+		<Navbar /> <!-- 2. La inyectamos de forma global -->
+		
+		<!-- El contenido de tus páginas se pintará aquí abajo -->
+		<slot />
+		<Footer /> 
+	</body>
+</html>
+

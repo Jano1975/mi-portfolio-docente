@@ -1,0 +1,39 @@
+---
+// src/pages/index.astro
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';         // <-- 1. Importamos el nuevo Hero
+import CardProyecto from '../components/CardProyecto.astro';
+
+const todosLosProyectos = await getCollection('proyectos');
+const proyectosOrdenados = todosLosProyectos.sort(
+	(a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
+---
+
+<BaseLayout title="Mi Portfolio Docente | Inicio">
+	
+	<!-- 2. Añadimos el componente Hero antes del contenido principal -->
+	<Hero />
+
+	<!-- Dejamos el main enfocado exclusivamente en las tarjetas de tus recursos -->
+	<main id="proyectos" class="max-w-5xl w-full mx-auto py-16 px-4 flex-1">
+		
+		<div class="max-w-2xl mb-12">
+			<h2 class="text-3xl font-extrabold tracking-tight text-slate-900 mb-3 sm:text-4xl">
+				Recursos y Proyectos Docentes
+			</h2>
+			<p class="text-base text-slate-600">
+				Una muestra de las unidades didácticas, talleres y metodologías activas que diseño y aplico en el aula.
+			</p>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+			{proyectosOrdenados.map((proyecto) => (
+				<CardProyecto proyecto={proyecto} />
+			))}
+		</div>
+
+	</main>
+
+</BaseLayout>

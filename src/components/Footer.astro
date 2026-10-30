@@ -1,0 +1,38 @@
+---
+// src/components/Footer.astro
+const añoActual = new Date().getFullYear();
+---
+
+<footer class="w-full bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-900 mt-auto transition-colors duration-300">
+  <div class="max-w-5xl w-full mx-auto px-4 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="text-center sm:text-left space-y-1">
+      <p class="text-sm font-semibold text-slate-900 dark:text-white tracking-tight">Portfolio Docente & Dev</p>
+      ...
+
+      <p class="text-xs text-slate-400">
+        &copy; {añoActual} • Desarrollado desde cero con Astro y Tailwind CSS.
+      </p>
+    </div>
+
+    <!-- Enlaces Secundarios / Redes -->
+    <div class="flex items-center gap-6">
+      <a 
+        href="https://github.com" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="text-xs font-medium text-slate-500 hover:text-indigo-600 transition-colors flex items-center gap-1.5"
+      >
+        <span>GitHub</span>
+      </a>
+      <a 
+        href="https://linkedin.com" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="text-xs font-medium text-slate-500 hover:text-indigo-600 transition-colors flex items-center gap-1.5"
+      >
+        <span>LinkedIn</span>
+      </a>
+    </div>
+
+  </div>
+</footer>

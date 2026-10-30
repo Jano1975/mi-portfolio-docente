@@ -1,0 +1,50 @@
+---
+// src/components/ThemeToggle.astro
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  class="text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-xl p-2.5 text-sm transition-colors"
+  aria-label="Cambiar tema de la página"
+>
+  <!-- Icono Sol (se muestra en modo oscuro) -->
+  <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 2.293a1 1 0 011.414 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zm4 4.707a1 1 0 011 1v1a1 1 0 11-2 0V10a1 1 0 011-1zm-2.293 4a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.414-1.414l.707-.707zM10 16a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM4.464 14.464a1 1 0 011.414 0l.707.707a1 1 0 11-1.414 1.414l-.707-.707a1 1 0 010-1.414zM2 10a1 1 0 011-1h1a1 1 0 110 2H3a1 1 0 01-1-1zm2.293-5.707a1 1 0 010 1.414l-.707.707A1 1 0 112.172 5.05l.707-.707a1 1 0 011.414 0zM10 5a5 5 0 100 10 5 5 0 000-10z"></path>
+  </svg>
+  <!-- Icono Luna (se muestra en modo claro) -->
+  <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+  </svg>
+</button>
+
+<script>
+  // Lógica del lado del cliente para manejar el evento click
+  const botonToggle = document.getElementById('theme-toggle');
+  const iconoLuz = document.getElementById('theme-toggle-light-icon');
+  const iconoOscuro = document.getElementById('theme-toggle-dark-icon');
+
+  if (botonToggle && iconoLuz && iconoOscuro) {
+    // Sincronizar iconos iniciales basándonos en la clase actual del HTML
+    if (document.documentElement.classList.contains('dark')) {
+      iconoLuz.classList.remove('hidden');
+    } else {
+      iconoOscuro.classList.remove('hidden');
+    }
+
+    botonToggle.addEventListener('click', () => {
+      // Intercambiar clases visuales de los iconos
+      iconoLuz.classList.toggle('hidden');
+      iconoOscuro.classList.toggle('hidden');
+
+      // Intercambiar clase dark en el HTML y guardar en LocalStorage
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  }
+</script>

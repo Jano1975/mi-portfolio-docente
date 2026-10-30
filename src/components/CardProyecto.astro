@@ -1,0 +1,74 @@
+---
+// src/components/CardProyecto.astro
+interface Props {
+  proyecto: {
+    id: string;
+    data: {
+      title: string;
+      description: string;
+      pubDate: Date;
+      nivelEducativo: string;
+      metodologias: string[];
+      tagsTecnicos: string[];
+    };
+  };
+}
+
+// Recuperamos el proyecto desde las Props del componente
+const { proyecto } = Astro.props;
+
+// Formateamos la fecha de manera limpia (Ej: "30 de octubre de 2026")
+const fechaFormateada = proyecto.data.pubDate.toLocaleDateString('es-ES', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:shadow-md hover:border-slate-200 transition-all duration-300">
+  <div>
+    <!-- Nivel Educativo y Fecha -->
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-[11px] font-bold tracking-wider text-indigo-600 uppercase bg-indigo-50 px-2.5 py-0.5 rounded-full">
+        {proyecto.data.nivelEducativo}
+      </span>
+      <time class="text-xs text-slate-400 font-medium" datetime={proyecto.data.pubDate.toISOString()}>
+        {fechaFormateada}
+      </time>
+    </div>
+
+    <!-- Título con enlace dinámico (usaremos el ID de Astro para la ruta) -->
+    <h3 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white line-clamp-2 mb-2 hover:text-indigo-600 transition-colors">
+      <a href={`/proyectos/${proyecto.id}`}>
+        {proyecto.data.title}
+      </a>
+    </h3>
+
+    <!-- Descripción corta -->
+    <p class="text-slate-600 text-sm line-clamp-3 mb-4">
+      {proyecto.data.description}
+    </p>
+  </div>
+
+  <div>
+    <!-- Metodologías Pedagógicas -->
+    <div class="flex flex-wrap gap-1 mb-3">
+      {proyecto.data.metodologias.map((metodologia) => (
+        <span class="text-[11px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded font-medium">
+          {metodologia}
+        </span>
+      ))}
+    </div>
+
+    <hr class="border-slate-100 my-3" />
+
+    <!-- Tags Técnicos -->
+    <div class="flex flex-wrap gap-1.5">
+      {proyecto.data.tagsTecnicos.map((tag) => (
+        <span class="text-xs text-slate-500 font-mono">
+          #{tag}
+        </span>
+      ))}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+/* 1. Importación oficial de plugins en Tailwind v4 */
+@plugin "@tailwindcss/typography";
+
+/* 2. Definimos de forma explícita la variante para activar el modo oscuro por clase */
+@custom-variant dark (&:where(.dark, .dark *));
+@theme {
+  --animate-*: initial;
+}

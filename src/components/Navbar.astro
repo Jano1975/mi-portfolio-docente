@@ -1,0 +1,49 @@
+---
+// src/components/Navbar.astro
+import ThemeToggle from './ThemeToggle.astro'; // <-- 1. Importamos el componente
+
+const enlaces = [
+  { nombre: 'Inicio', ruta: '/' },
+  { nombre: 'Sobre mí', ruta: '/#sobre-mi' },
+  { nombre: 'Proyectos', ruta: '/#proyectos' },
+];
+---
+
+<!-- Actualizamos las clases del header para que soporte modo oscuro -->
+<header class="sticky top-0 z-50 w-full bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-100 dark:border-slate-900 transition-colors duration-300">
+  <div class="max-w-5xl w-full mx-auto px-4 h-16 flex items-center justify-between">
+    
+    <a href="/" class="flex items-center gap-2 group">
+      <span class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-sm group-hover:bg-indigo-700 transition-colors">
+        🧑‍🏫
+      </span>
+      <span class="font-bold text-slate-900 dark:text-white tracking-tight group-hover:text-indigo-600 transition-colors">
+        Portfolio Docente
+      </span>
+    </a>
+
+    <nav class="flex items-center gap-4 sm:gap-6">
+      {enlaces.map((enlace) => (
+        <a 
+          href={enlace.ruta} 
+          class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+        >
+          {enlace.nombre}
+        </a>
+      ))}
+      
+      <!-- 2. Colocamos el botón del tema -->
+      <ThemeToggle />
+      
+      <a 
+        href="https://linkedin.com" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="hidden sm:inline-flex text-xs font-semibold text-white bg-slate-900 dark:bg-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 px-3.5 py-2 rounded-xl transition-colors"
+      >
+        LinkedIn
+      </a>
+    </nav>
+
+  </div>
+</header>
