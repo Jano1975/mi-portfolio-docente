@@ -20,17 +20,28 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 24 # Usamos Node 24 nativo
           cache: npm
+
       - name: Configurar Pages
         uses: actions/configure-pages@v5
+
       - name: Instalar dependencias
         run: npm ci
+
       - name: Compilar con Astro
         run: npm run build
+
+      # —— ¡ESTE ES EL PASO CLAVE QUE FALTABA! ——
+      # Toma la carpeta 'dist' que genera Astro y la empaqueta para Pages
+      - name: Subir artefacto de compilación
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
 
   deploy:
     name: Publicar en Pages
