@@ -6,7 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
   site: "https://github.com/Jano1975/Portfolio.github.io",
-
+  base: "/mi-portfolio-docente",
   // Mantenemos el modo de salida estático idóneo para GitHub Pages
   output: "static",
   vite: {

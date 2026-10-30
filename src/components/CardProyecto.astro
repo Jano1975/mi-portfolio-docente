@@ -38,8 +38,9 @@ const fechaFormateada = proyecto.data.pubDate.toLocaleDateString('es-ES', {
     </div>
 
     <!-- Título con enlace dinámico (usaremos el ID de Astro para la ruta) -->
-    <h3 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white line-clamp-2 mb-2 hover:text-indigo-600 transition-colors">
-      <a href={`/proyectos/${proyecto.id}`}>
+    <h3 class="text-xl font-bold tracking-tight text-slate-900 line-clamp-2 mb-2 hover:text-indigo-600 transition-colors">
+      <!-- Añadimos el prefijo /mi-portfolio-docente antes de la ruta del ID -->
+      <a href={`/mi-portfolio-docente/proyectos/${proyecto.id}`}>
         {proyecto.data.title}
       </a>
     </h3>
